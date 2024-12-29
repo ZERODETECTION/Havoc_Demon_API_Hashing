@@ -32,7 +32,79 @@ def hash_ex(input_string, length=0, upper=False, hash_key=5381):
     return int.from_bytes(hash_value.to_bytes(4, 'big'), 'little')
 
 
+# Funktionen in ein Array packen
+functions = [
+    "LdrGetProcedureAddress",
+    "LdrLoadDll",
+    "RtlAllocateHeap",
+    "RtlReAllocateHeap",
+    "RtlFreeHeap",
+    "RtlExitUserThread",
+    "RtlExitUserProcess",
+    "RtlRandomEx",
+    "RtlNtStatusToDosError",
+    "RtlGetVersion",
+    "RtlCreateTimerQueue",
+    "RtlCreateTimer",
+    "RtlQueueWorkItem",
+    "RtlRegisterWait",
+    "RtlDeleteTimerQueue",
+    "RtlCaptureContext",
+    "RtlAddVectoredExceptionHandler",
+    "RtlRemoveVectoredExceptionHandler",
+    "RtlCopyMappedMemory",
+    "NtClose",
+    "NtCreateEvent",
+    "NtSetEvent",
+    "NtSetInformationThread",
+    "NtSetInformationVirtualMemory",
+    "NtGetNextThread",
+    "NtOpenProcess",
+    "NtTerminateProcess",
+    "NtQueryInformationProcess",
+    "NtQuerySystemInformation",
+    "NtAllocateVirtualMemory",
+    "NtQueueApcThread",
+    "NtOpenThread",
+    "NtOpenThreadToken",
+    "NtResumeThread",
+    "NtSuspendThread",
+    "NtCreateEvent",
+    "NtDuplicateObject",
+    "NtGetContextThread",
+    "NtSetContextThread",
+    "NtWaitForSingleObject",
+    "NtAlertResumeThread",
+    "NtSignalAndWaitForSingleObject",
+    "NtTestAlert",
+    "NtCreateThreadEx",
+    "NtOpenProcessToken",
+    "NtDuplicateToken",
+    "NtProtectVirtualMemory",
+    "NtTerminateThread",
+    "NtWriteVirtualMemory",
+    "NtContinue",
+    "NtReadVirtualMemory",
+    "NtFreeVirtualMemory",
+    "NtUnmapViewOfSection",
+    "NtQueryVirtualMemory",
+    "NtQueryInformationToken",
+    "NtQueryInformationThread",
+    "NtQueryObject",
+    "NtTraceEvent"
+]
+
 # Example Usage
 test_string = "LdrLoadDll"
 hash_key = 5381
 print(f"Hash of '{test_string}': 0x{hash_ex(test_string, upper=True, hash_key=hash_key):08X}")
+
+
+
+# Beispiel: Loop über das Array und Ausgabe der Funktionsnamen
+for func in functions:
+    print(f"Function: {func}")
+    # Example Usage
+    test_string = func
+    hash_key = 5381
+    print(f"Hash of '{test_string}': 0x{hash_ex(test_string, upper=True, hash_key=hash_key):08X}")
