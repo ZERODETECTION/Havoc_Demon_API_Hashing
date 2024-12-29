@@ -1,3 +1,17 @@
+
+
+"""
+
+Hashing Function:
+https://github.com/HavocFramework/Havoc/blob/main/payloads/Demon/src/core/Win32.c
+https://github.com/HavocFramework/Havoc/blob/main/payloads/Demon/include/core/Win32.h
+
+Defines:
+https://github.com/HavocFramework/Havoc/blob/41a5d45c2b843d19be581a94350c532c1cd7fd49/payloads/Demon/include/common/Defines.h#L44
+
+"""
+
+
 def hash_ex(input_string, length=0, upper=False, hash_key=5381):
     """
     Reimplementation of the HashEx function in Python.
@@ -95,16 +109,34 @@ functions = [
 ]
 
 # Example Usage
+"""
 test_string = "LdrLoadDll"
 hash_key = 5381
 print(f"Hash of '{test_string}': 0x{hash_ex(test_string, upper=True, hash_key=hash_key):08X}")
-
+"""
 
 
 # Beispiel: Loop über das Array und Ausgabe der Funktionsnamen
+
+#  define H_FUNC_LDRLOADDLL                            0x9e456a43
+
+
+def reverse_hash(original_hash):
+    # Umwandlung des Hashes in Bytes und Umkehrung der Byte-Reihenfolge
+    return original_hash.to_bytes(4, 'little').hex().upper()
+    
+
 for func in functions:
-    print(f"Function: {func}")
-    # Example Usage
     test_string = func
     hash_key = 5381
-    print(f"Hash of '{test_string}': 0x{hash_ex(test_string, upper=True, hash_key=hash_key):08X}")
+    # Berechnung des Hash-Werts
+    hash_value = hash_ex(test_string, upper=True, hash_key=hash_key)
+    
+    # Ausgabe des Original-Hashes in Kleinbuchstaben
+    # print(f"Hash of '{test_string}': 0x{hash_value:08X}".lower())
+    
+    # Umkehren des Hashes und Umwandlung in Kleinbuchstaben
+    reversed_hash = reverse_hash(hash_value)
+    
+    # Ausgabe des #define Makros im gewünschten Format in Kleinbuchstaben
+    print(f"#define H_FUNC_{test_string.upper():<30} 0x{reversed_hash.lower()}")
